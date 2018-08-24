@@ -1,21 +1,24 @@
 ﻿var res = {
-    Back_down_png: "res/Back-down.png",
-    Back_up_png: "res/Back-up.png",
-    Background_png: "res/Background.png",
-    Go_down_png: "res/Go-down.png",
-    Go_up_png: "res/Go-up.png",
-    hero_png: "res/hero.png",
-    fnt2_png: "res/fonts/fnt2.png",
-    fnt2_fnt: "res/fonts/fnt2.fnt",
     cat_png: "res/cat.png",
-    tomb_png: "res/tomb.png",
+    tomb1_png: "res/tomb1.png",
+    blood_png: "res/blood.png",
     dog_png: "res/dog.png",
     sheep_png: "res/sheep.png",
-    meat_png: "res/meat.png",
     hidden_png: "res/hidden.png",
-
-
-
+    man_png:"res/man.png",
+    win_png:"res/win.png",
+    lose_png:"res/lose.png",
+    bg_jpg:"res/bg.jpg",
+    bg_mp3:"res/sound/bg.mp3",
+    gun_wav:"res/sound/gun.wav",
+    win_mp3:"res/sound/win.mp3",
+    lose_mp3:"res/sound/lose.mp3",
+    normal_png:"res/normal.png",
+    heaven_png:"res/heaven.png",
+    hell_png:"res/hell.png",
+    start_png:"res/start.png",
+    back_png:"res/back.png",
+    title_png:"res/title.png"
 };
 
 var g_resources = [

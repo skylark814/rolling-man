@@ -1,104 +1,64 @@
-﻿var HelloWorldLayer = cc.Layer.extend({
+﻿var audioEngine = cc.audioEngine;
 
+var MainLayer = cc.Layer.extend({
+    title:null,
     ctor: function () {
-        //////////////////////////////
-        // 1. super init first
         this._super();
-
-        /////////////////////////////
-        // 2. add a menu item with "X" image, which is clicked to quit the program
-        //    you may modify it.
-        // ask director the window size
         var size = cc.director.getWinSize();
-
-        var bg = new cc.Sprite(res.Background_png);
+        var bg = new cc.Sprite(res.bg_jpg);
         bg.x = size.width / 2;
         bg.y = size.height / 2;
         this.addChild(bg);
 
-        var pItmLabel1 = new cc.LabelBMFont("MoveTo", res.fnt2_fnt);
-        var pItmMenu1 = new cc.MenuItemLabel(pItmLabel1, this.onMenuCallback, this);
-        pItmMenu1.tag = ActionTypes.kMoveTo;
+        this.title = new cc.Sprite(res.title_png);
+        this.title.x = cc.winSize.width/2;
+        this.title.y = cc.winSize.height * 8 / 10;
+        this.addChild(this.title);
 
-        var pItmLabel2 = new cc.LabelBMFont("MoveBy", res.fnt2_fnt);
-        var pItmMenu2 = new cc.MenuItemLabel(pItmLabel2, this.onMenuCallback, this);
-        pItmMenu2.tag = ActionTypes.kMoveBy;
+        let pItmMenu1 = new cc.MenuItemImage(res.heaven_png,
+            res.heaven_png,
+            this.onMenuCallback1, this);
+        // pItmMenu1.x = cc.winSize.width /2;
+        // pItmMenu1.y = cc.winSize.height*1/10;
 
-        var pItmLabel3 = new cc.LabelBMFont("JumpTo", res.fnt2_fnt);
-        var pItmMenu3 = new cc.MenuItemLabel(pItmLabel3, this.onMenuCallback, this);
-        pItmMenu3.tag = ActionTypes.kJumpTo;
+        let pItmMenu2 = new cc.MenuItemImage(res.normal_png,
+            res.normal_png,
+            this.onMenuCallback2, this);
+        // pItmMenu2.x = cc.winSize.width /2;
+        // pItmMenu2.y = cc.winSize.height*4/10;
 
-        var pItmLabel4 = new cc.LabelBMFont("JumpBy", res.fnt2_fnt);
-        var pItmMenu4 = new cc.MenuItemLabel(pItmLabel4, this.onMenuCallback, this);
-        pItmMenu4.tag = ActionTypes.kJumpBy;
+        let pItmMenu3 = new cc.MenuItemImage(res.hell_png,
+            res.hell_png,
+            this.onMenuCallback3, this);
+        // pItmMenu3.x = cc.winSize.width /2;
+        // pItmMenu3.y = cc.winSize.height*6/10;
 
-        var pItmLabel5 = new cc.LabelBMFont("BezierBy", res.fnt2_fnt);
-        var pItmMenu5 = new cc.MenuItemLabel(pItmLabel5, this.onMenuCallback, this);
-        pItmMenu5.tag = ActionTypes.kBezierBy;
-
-        var pItmLabel6 = new cc.LabelBMFont("ScaleTo", res.fnt2_fnt);
-        var pItmMenu6 = new cc.MenuItemLabel(pItmLabel6, this.onMenuCallback, this);
-        pItmMenu6.tag = ActionTypes.kScaleTo;
-
-        var pItmLabel7 = new cc.LabelBMFont("ScaleBy", res.fnt2_fnt);
-        var pItmMenu7 = new cc.MenuItemLabel(pItmLabel7, this.onMenuCallback, this);
-        pItmMenu7.tag = ActionTypes.kScaleBy;
-
-        var pItmLabel8 = new cc.LabelBMFont("RotateTo", res.fnt2_fnt);
-        var pItmMenu8 = new cc.MenuItemLabel(pItmLabel8, this.onMenuCallback, this);
-        pItmMenu8.tag = ActionTypes.kRotateTo;
-
-        var pItmLabel9 = new cc.LabelBMFont("RotateBy", res.fnt2_fnt);
-        var pItmMenu9 = new cc.MenuItemLabel(pItmLabel9, this.onMenuCallback, this);
-        pItmMenu9.tag = ActionTypes.kRotateBy;
-
-        var pItmLabel10 = new cc.LabelBMFont("Blink", res.fnt2_fnt);
-        var pItmMenu10 = new cc.MenuItemLabel(pItmLabel10, this.onMenuCallback, this);
-        pItmMenu10.tag = ActionTypes.kBlink;
-
-        var pItmLabel11 = new cc.LabelBMFont("TintTo", res.fnt2_fnt);
-        var pItmMenu11 = new cc.MenuItemLabel(pItmLabel11, this.onMenuCallback, this);
-        pItmMenu11.tag = ActionTypes.kTintTo;
-
-        var pItmLabel12 = new cc.LabelBMFont("TintBy", res.fnt2_fnt);
-        var pItmMenu12 = new cc.MenuItemLabel(pItmLabel12, this.onMenuCallback, this);
-        pItmMenu12.tag = ActionTypes.kTintBy;
-
-        var pItmLabel13 = new cc.LabelBMFont("FadeTo", res.fnt2_fnt);
-        var pItmMenu13 = new cc.MenuItemLabel(pItmLabel13, this.onMenuCallback, this);
-        pItmMenu13.tag = ActionTypes.kFadeTo;
-
-        var pItmLabel14 = new cc.LabelBMFont("FadeIn", res.fnt2_fnt);
-        var pItmMenu14 = new cc.MenuItemLabel(pItmLabel14, this.onMenuCallback, this);
-        pItmMenu14.tag = ActionTypes.kFadeIn;
-
-        var pItmLabel15 = new cc.LabelBMFont("FadeOut", res.fnt2_fnt);
-        var pItmMenu15 = new cc.MenuItemLabel(pItmLabel15, this.onMenuCallback, this);
-        pItmMenu15.tag = ActionTypes.kFadeOut;
-
-        var mn = new cc.Menu(pItmMenu1, pItmMenu2, pItmMenu3, pItmMenu4, pItmMenu5,
-            pItmMenu6, pItmMenu7, pItmMenu8, pItmMenu9,
-            pItmMenu10, pItmMenu11, pItmMenu12,
-            pItmMenu13, pItmMenu14, pItmMenu15);
-        mn.alignItemsInColumns(3, 3, 3, 3, 3);
+        var mn = new cc.Menu(pItmMenu1, pItmMenu2, pItmMenu3);
+        mn.alignItemsVertically();
+        mn.x = cc.winSize.width/2;
+        mn.y = cc.winSize.height*1/3;
         this.addChild(mn);
-
         return true;
     },
-    onMenuCallback: function (sender) {
-        cc.log("tag = " + sender.tag);
-        var scene = new MyActionScene();
-        var layer = new MyActionLayer(sender.tag);
-        //layer.tag = sender.tag;
-        scene.addChild(layer);
-        cc.director.pushScene(new cc.TransitionSlideInR(1, scene));
+    onMenuCallback1: function () {
+        cc.director.pushScene(new cc.TransitionJumpZoom(1, new HeavenScene()));
+    },
+    onMenuCallback2: function () {
+        cc.director.pushScene(new cc.TransitionSlideInR(1, new NormalScene()));
+    },
+    onMenuCallback3: function () {
+        cc.director.pushScene(new cc.TransitionSlideInR(1, new HellScene()));
+    },
+    onEnterTransitionDidFinish: function () {
+        this._super();
+         audioEngine.playMusic(res.bg_mp3, true);
     }
 });
 
-var HelloWorldScene = cc.Scene.extend({
+var MainScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
-        var layer = new HelloWorldLayer();
+        var layer = new MainLayer();
         this.addChild(layer);
     }
 });
