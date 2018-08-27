@@ -10,6 +10,9 @@ var MainLayer = cc.Layer.extend({
         bg.y = size.height / 2;
         this.addChild(bg);
 
+        cc._canvas.style.cursor ="default";
+
+
         this.title = new cc.Sprite(res.title_png);
         this.title.x = cc.winSize.width/2;
         this.title.y = cc.winSize.height * 8 / 10;
@@ -51,7 +54,7 @@ var MainLayer = cc.Layer.extend({
     },
     onEnterTransitionDidFinish: function () {
         this._super();
-         audioEngine.playMusic(res.bg_mp3, true);
+        audioEngine.playMusic(res.bg_mp3, true);
     }
 });
 

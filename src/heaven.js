@@ -18,6 +18,7 @@
     showScore: null,
     winImg: null,
     loseImg: null,
+    sight: null,
     ctor: function () {
         this._super();
 
@@ -33,10 +34,14 @@
         this.bg.y = cc.winSize.height / 2;
         this.addChild(this.bg);
 
-        this.showScore = new cc.LabelTTF("Score:0", "", 32);
-        this.showScore.x = cc.winSize.width *  8/ 10;
+        this.sight = new cc.Sprite(res.sight_png);
+        this.addChild(this.sight, 5);
+
+
+        this.showScore = new cc.LabelTTF("Score:0", "粗體", 50);
+        this.showScore.x = cc.winSize.width * 17 / 20;
         this.showScore.y = cc.winSize.height * 9 / 10;
-        this.showScore.setColor(cc.color(255,0,0));
+        this.showScore.setColor(cc.color(102, 0, 255));
         this.addChild(this.showScore);
 
         this.sprite = new cc.Sprite(res.hidden_png);
@@ -47,22 +52,22 @@
         let goMenuItem = new cc.MenuItemImage(res.start_png,
             res.start_png,
             this.onMenuCallback, this);
-        goMenuItem.x = cc.winSize.width *9/10;
-        goMenuItem.y = cc.winSize.height*4/30;
+        goMenuItem.x = cc.winSize.width * 9 / 10;
+        goMenuItem.y = cc.winSize.height * 4 / 30;
 
         let backMenuItem = new cc.MenuItemImage(res.back_png, res.back_png,
             function () {
                 cc.director.popScene();
             }, this);
-        backMenuItem.x = cc.winSize.width/10;
-        backMenuItem.y = cc.winSize.height*9/10;
+        backMenuItem.x = cc.winSize.width / 10;
+        backMenuItem.y = cc.winSize.height * 9 / 10;
 
         let backMenuItem2 = new cc.MenuItemImage(res.back_png, res.back_png,
             function () {
                 cc.director.popScene();
             }, this);
-        backMenuItem2.x = cc.winSize.width/10;
-        backMenuItem2.y = cc.winSize.height*9/10;
+        backMenuItem2.x = cc.winSize.width / 10;
+        backMenuItem2.y = cc.winSize.height * 9 / 10;
 
         this.mn1 = new cc.Menu(goMenuItem, backMenuItem);
         this.addChild(this.mn1, 2);
@@ -90,14 +95,14 @@
                     let x = event.getLocationX();
                     let y = event.getLocationY();
                     let point = new cc.Point(x, y);
-                    let dropDown = cc.moveTo(0.5, cc.p(x + 50, cc.winSize.height / 4-30));
+                    let dropDown = cc.moveTo(0.5, cc.p(x + 50, cc.winSize.height / 4 - 30));
                     let rote = cc.rotateBy(0.5, 360);
                     let dropSpawn = cc.spawn(dropDown, rote);
                     let changeTombImg = function () {
                         layer.tomb.x = x + 50;
                         layer.tomb.y = cc.winSize.height / 4;
                         layer.blood.x = x + 50;
-                        layer.blood.y = cc.winSize.height / 4-40;
+                        layer.blood.y = cc.winSize.height / 4 - 40;
                         layer.removeChild(layer.spriteMoveGround);
                         if (layer.imgId === 0) {
                             layer.addChild(layer.tomb);
@@ -111,11 +116,11 @@
                     if (cc.rectContainsPoint(layer.spriteRec, point)) {
                         if (layer.imgId === 0) {
                             layer.score += 10;
-                            layer.showScore.setString("Score:"+layer.score);
+                            layer.showScore.setString("Score:" + layer.score);
                         }
-                        else{
+                        else {
                             layer.score -= 10;
-                            layer.showScore.setString("Score:"+layer.score);
+                            layer.showScore.setString("Score:" + layer.score);
                         }
                         layer.spriteMoveGround.x = x;
                         layer.spriteMoveGround.y = y;
@@ -123,6 +128,13 @@
                         layer.addChild(layer.spriteMoveGround);
                         layer.spriteMoveGround.runAction(cc.sequence(dropSpawn, cc.callFunc(changeTombImg)));
                     }
+                },
+                onMouseMove: function (e) {
+                    let x = e.getLocationX();
+                    let y = e.getLocationY();
+                    cc._canvas.style.cursor = "none";
+                    layer.sight.x = x;
+                    layer.sight.y = y;
                 }
             };
             cc.eventManager.addListener(mouseListener, this);
@@ -137,7 +149,7 @@
         );
     },
     onMenuCallback() {
-        this.sprite.schedule(this.actionUpdate, 3.5, 10,0.1);
+        this.sprite.schedule(this.actionUpdate, 3.5, 10, 0.1);
         this.removeChild(this.mn1);
         this.sprite.schedule(this.winOrLose, 0.1, 0, 35.1);
     },
@@ -148,7 +160,7 @@
         let bezier = [cc.p(layer.sprite.x, cc.winSize.height / 3), cc.p(cc.winSize.width / 2, cc.winSize.height + i),
             cc.p(cc.winSize.width + 100, cc.winSize.height / 3)];
         let bz = cc.bezierTo(3, bezier);
-        let roll = cc.rotateBy(3, 360*2);
+        let roll = cc.rotateBy(3, 360 * 2);
         let imgSpawn = cc.spawn(bz, roll);
         layer.sprite.runAction(imgSpawn);
         this.removeChild(layer.sprite);
@@ -163,7 +175,7 @@
         if (this.imgArr[this.randomI] === res.man_png) {
             this.sprite.setScale(0.2, 0.2);
             this.spriteMoveGround = new cc.Sprite(res.man_png);
-            this.spriteMoveGround.setScale(0.2,0.2);
+            this.spriteMoveGround.setScale(0.2, 0.2);
             this.imgId = 0;
         }
         else {
@@ -193,7 +205,7 @@
             layer.loseImg = new cc.Sprite(res.lose_png);
             layer.loseImg.x = cc.winSize.width / 2;
             layer.loseImg.y = cc.winSize.height / 2;
-            layer.loseImg.setScale(0.5,0.5);
+            layer.loseImg.setScale(0.5, 0.5);
             layer.addChild(layer.loseImg);
             audioEngine.playEffect(res.lose_mp3);
         }

@@ -33,6 +33,9 @@
         this.bg.y = cc.winSize.height / 2;
         this.addChild(this.bg);
 
+        this.sight = new cc.Sprite(res.sight_png);
+        this.addChild(this.sight, 5);
+
         this.showScore = new cc.LabelTTF("Score:0", "", 32);
         this.showScore.x = cc.winSize.width *  8/ 10;
         this.showScore.y = cc.winSize.height * 9 / 10;
@@ -123,6 +126,13 @@
                         layer.addChild(layer.spriteMoveGround);
                         layer.spriteMoveGround.runAction(cc.sequence(dropSpawn, cc.callFunc(changeTombImg)));
                     }
+                },
+                onMouseMove: function (e) {
+                    let x = e.getLocationX();
+                    let y = e.getLocationY();
+                    cc._canvas.style.cursor = "none";
+                    layer.sight.x = x;
+                    layer.sight.y = y;
                 }
             };
             cc.eventManager.addListener(mouseListener, this);

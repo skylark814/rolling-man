@@ -18,7 +18,9 @@
     hell_png:"res/hell.png",
     start_png:"res/start.png",
     back_png:"res/back.png",
-    title_png:"res/title.png"
+    title_png:"res/title.png",
+    sight_png:"res/sight.png",
+    help_png:"res/help.png"
 };
 
 var g_resources = [
@@ -33,3 +35,5 @@ var g_resources = [
 for (var i in res) {
     g_resources.push(res[i]);
 }
+
+
