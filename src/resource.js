@@ -20,7 +20,19 @@
     back_png:"res/back.png",
     title_png:"res/title.png",
     sight_png:"res/sight.png",
-    help_png:"res/help.png"
+    help_png:"res/help.png",
+    helpbg_jpg:"res/helpbg.jpg",
+    demo_png:"res/demo.png",
+    helpbg_png:"res/helpbg.png",
+    desc1_png:"res/desc1.png",
+    desc2_png:"res/desc2.png",
+    desc3_png:"res/desc3.png",
+    desc4_png:"res/desc4.png",
+    x3_png:"res/x3.png",
+    x4_png:"res/x4.png",
+    x5_png:"res/x5.png",
+    arrow_png:"res/arrow.png"
+
 };
 
 var g_resources = [

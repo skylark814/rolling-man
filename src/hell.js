@@ -36,10 +36,10 @@
         this.sight = new cc.Sprite(res.sight_png);
         this.addChild(this.sight, 5);
 
-        this.showScore = new cc.LabelTTF("Score:0", "", 32);
-        this.showScore.x = cc.winSize.width *  8/ 10;
+        this.showScore = new cc.LabelTTF("Score:0", "Vani", 50);
+        this.showScore.x = cc.winSize.width * 17 / 20;
         this.showScore.y = cc.winSize.height * 9 / 10;
-        this.showScore.setColor(cc.color(255,0,0));
+        this.showScore.setColor(cc.color(102, 0, 255));
         this.addChild(this.showScore);
 
         this.sprite = new cc.Sprite(res.hidden_png);

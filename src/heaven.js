@@ -38,7 +38,7 @@
         this.addChild(this.sight, 5);
 
 
-        this.showScore = new cc.LabelTTF("Score:0", "粗體", 50);
+        this.showScore = new cc.LabelTTF("Score:0", "Vani", 50);
         this.showScore.x = cc.winSize.width * 17 / 20;
         this.showScore.y = cc.winSize.height * 9 / 10;
         this.showScore.setColor(cc.color(102, 0, 255));

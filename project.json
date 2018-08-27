@@ -15,6 +15,7 @@
         "src/app.js",
         "src/heaven.js",
         "src/normal.js",
-        "src/hell.js"
+        "src/hell.js",
+        "src/help.js"
     ]
 }
