@@ -64,7 +64,7 @@ var MainLayer = cc.Layer.extend({
     },
     onEnterTransitionDidFinish: function () {
         this._super();
-        // audioEngine.playMusic(res.bg_mp3, true);
+         audioEngine.playMusic(res.bg_mp3, true);
     }
 });
 

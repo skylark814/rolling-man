@@ -1,9 +1,9 @@
 ﻿var res = {
     cat_png: "res/cat.png",
+    cat2_png: "res/cat2.png",
+    cat3_png: "res/cat3.png",
     tomb1_png: "res/tomb1.png",
     blood_png: "res/blood.png",
-    dog_png: "res/dog.png",
-    sheep_png: "res/sheep.png",
     hidden_png: "res/hidden.png",
     man_png:"res/man.png",
     win_png:"res/win.png",

@@ -22,8 +22,8 @@
     ctor: function () {
         this._super();
 
-        this.imgArr = [res.man_png, res.man_png, res.man_png, res.cat_png, res.dog_png, res.sheep_png,
-            res.cat_png, res.dog_png, res.sheep_png, res.cat_png,];
+        this.imgArr = [res.man_png, res.man_png, res.man_png, res.cat_png, res.cat2_png, res.cat3_png,
+            res.cat_png, res.cat2_png, res.cat3_png, res.cat_png,];
         this.tombArr = [res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png,
             res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png];
         this.bloodArr = [res.blood_png, res.blood_png, res.blood_png, res.blood_png, res.blood_png, res.blood_png,
@@ -95,13 +95,13 @@
                     let x = event.getLocationX();
                     let y = event.getLocationY();
                     let point = new cc.Point(x, y);
-                    let dropDown = cc.moveTo(0.5, cc.p(x + 50, cc.winSize.height / 4 - 30));
+                    let dropDown = cc.moveTo(0.5, cc.p(x + 100, cc.winSize.height / 4 - 30));
                     let rote = cc.rotateBy(0.5, 360);
                     let dropSpawn = cc.spawn(dropDown, rote);
                     let changeTombImg = function () {
-                        layer.tomb.x = x + 50;
+                        layer.tomb.x = x + 100;
                         layer.tomb.y = cc.winSize.height / 4;
-                        layer.blood.x = x + 50;
+                        layer.blood.x = x + 100;
                         layer.blood.y = cc.winSize.height / 4 - 40;
                         layer.removeChild(layer.spriteMoveGround);
                         if (layer.imgId === 0) {
@@ -140,14 +140,19 @@
             cc.eventManager.addListener(mouseListener, this);
         }
     },
+
+
     update() {
         this.spriteRec = new cc.Rect(
-            this.sprite.x - this.sprite.width / 2,
-            this.sprite.y - this.sprite.height / 2,
+            this.sprite.x - this.sprite.width/2 ,
+            this.sprite.y - this.sprite.height/2 ,
             this.sprite.width,
             this.sprite.height
         );
     },
+
+
+
     onMenuCallback() {
         this.sprite.schedule(this.actionUpdate, 3.5, 10, 0.1);
         this.removeChild(this.mn1);
@@ -156,13 +161,16 @@
     actionUpdate() {
         let layer = this.getParent();
         layer.changeImg();
+
         let i = Math.floor((Math.random() * 300) + 100);
-        let bezier = [cc.p(layer.sprite.x, cc.winSize.height / 3), cc.p(cc.winSize.width / 2, cc.winSize.height + i),
+        let bezier = [cc.p(layer.sprite.x, cc.winSize.height / 3),
+            cc.p(cc.winSize.width / 2, cc.winSize.height + i),
             cc.p(cc.winSize.width + 100, cc.winSize.height / 3)];
         let bz = cc.bezierTo(3, bezier);
         let roll = cc.rotateBy(3, 360 * 2);
         let imgSpawn = cc.spawn(bz, roll);
         layer.sprite.runAction(imgSpawn);
+
         this.removeChild(layer.sprite);
         layer.imgArr.splice(layer.randomI, 1);
         layer.tombArr.splice(layer.randomI, 1);

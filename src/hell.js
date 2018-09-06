@@ -21,8 +21,8 @@
     ctor: function () {
         this._super();
 
-        this.imgArr = [res.man_png, res.man_png, res.man_png, res.man_png, res.man_png, res.sheep_png,
-            res.cat_png, res.dog_png, res.sheep_png, res.cat_png,];
+        this.imgArr = [res.man_png, res.man_png, res.man_png, res.man_png, res.man_png, res.cat2_png,
+            res.cat_png, res.cat3_png, res.cat2_png, res.cat_png,];
         this.tombArr = [res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png,
             res.tomb1_png, res.tomb1_png, res.tomb1_png, res.tomb1_png];
         this.bloodArr = [res.blood_png, res.blood_png, res.blood_png, res.blood_png, res.blood_png, res.blood_png,
@@ -93,14 +93,14 @@
                     let x = event.getLocationX();
                     let y = event.getLocationY();
                     let point = new cc.Point(x, y);
-                    let dropDown = cc.moveTo(0.5, cc.p(x + 50, cc.winSize.height / 4-30));
-                    let rote = cc.rotateBy(0.5, 360);
+                    let dropDown = cc.moveTo(0.1, cc.p(x + 100, cc.winSize.height / 4-30));
+                    let rote = cc.rotateBy(0.1, 360);
                     let dropSpawn = cc.spawn(dropDown, rote);
 
                     let changeTombImg = function () {
-                        layer.tomb.x = x + 50;
+                        layer.tomb.x = x + 100;
                         layer.tomb.y = cc.winSize.height / 4;
-                        layer.blood.x = x + 50;
+                        layer.blood.x = x + 100;
                         layer.blood.y = cc.winSize.height / 4-40;
                         layer.removeChild(layer.spriteMoveGround);
                         if (layer.imgId === 0) {
@@ -193,7 +193,7 @@
     },
     winOrLose() {
         let layer = this.getParent();
-        if (layer.score === 30) {
+        if (layer.score === 50) {
             layer.winImg = new cc.Sprite(res.win_png);
             layer.winImg.x = cc.winSize.width / 2;
             layer.winImg.y = cc.winSize.height / 2;
